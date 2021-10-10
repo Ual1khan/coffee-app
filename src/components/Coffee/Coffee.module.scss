@@ -1,0 +1,9 @@
+.card {
+    margin-top: 35px;
+}
+
+.area {
+    &:hover {
+        transform: scale(1.1);
+    }
+}
