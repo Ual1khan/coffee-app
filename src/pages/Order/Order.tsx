@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { selectOrders, selectTotalPrice } from '../../store/coffee/coffee.selector';
-import { getTotalPrice, removeOrder } from '../../store/coffee/coffee.slice';
+import { getTotalPrice, postOrders, removeOrder } from '../../store/coffee/coffee.slice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const Order = () => {
@@ -30,7 +30,7 @@ const Order = () => {
                         </div>
                     ))}
                     <h4>Total price: {totalPrice}</h4>
-                    <button>Заказать</button>
+                    <button onClick={() => dispatch(postOrders())}>Заказать</button>
                 </div> : 
                 <div>
                     <h2>

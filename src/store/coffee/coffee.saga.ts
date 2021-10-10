@@ -1,7 +1,16 @@
-import { all, call, put, SagaReturnType, takeLatest } from "@redux-saga/core/effects";
-import { getAllAdditionals, getAllCoffees } from "../../services/coffee.service";
+import { all, call, put, SagaReturnType, select, takeLatest } from "@redux-saga/core/effects";
+import { getAllAdditionals, getAllCoffees, postAllOrders } from "../../services/coffee.service";
 import { failedFetching, startFetching, successFetching } from "../loading/loading.slice";
-import { fetchCoffees, fetchCoffeesSuccess, fetchAdditionals, fetchAdditionalsSuccess } from "./coffee.slice";
+import { selectOrders } from "./coffee.selector";
+import { 
+    fetchCoffees, 
+    fetchCoffeesSuccess, 
+    fetchAdditionals, 
+    fetchAdditionalsSuccess, 
+    postOrders, 
+    postOrdersSuccess,
+    IOrder,
+} from "./coffee.slice";
 
 export function* onFetchCoffees() {
     yield put(startFetching(fetchCoffees.type));
@@ -21,7 +30,6 @@ export function* onFetchCoffees() {
 
 export function* onFetchAdditionals() {
     yield put(startFetching(fetchAdditionals.type));
-
     try {
         const res: SagaReturnType<typeof getAllAdditionals> = yield getAllAdditionals();
         const additionals = res.data;
@@ -35,6 +43,21 @@ export function* onFetchAdditionals() {
     }
 }
 
+export function* onPostOrders() {
+    yield put(startFetching(postOrders.type));
+    const state: IOrder[] = yield select(selectOrders);
+    try {
+        const res: SagaReturnType<typeof postAllOrders> = yield postAllOrders(state);
+        console.log(res);
+        yield put(postOrdersSuccess(res.data));
+        yield put(successFetching(postOrders.type));
+    } catch (error: any) {
+        yield put(
+            failedFetching({ name: postOrders.type, error: error?.message as string })
+        );
+    }
+}
+
 export function* onFetchCoffeesStart() {
     yield takeLatest(fetchCoffees.type, onFetchCoffees);
 }
@@ -43,6 +66,10 @@ export function* onFetchAdditionalsStart() {
     yield takeLatest(fetchAdditionals.type, onFetchAdditionals);
 }
 
+export function* onPostOrdersStart() {
+    yield takeLatest(postOrders.type, onPostOrders);
+}
+
 export default function* coffeesSaga() {
-    yield all([call(onFetchCoffeesStart), call(onFetchAdditionalsStart)]);
+    yield all([call(onFetchCoffeesStart), call(onFetchAdditionalsStart), call(onPostOrdersStart)]);
 }

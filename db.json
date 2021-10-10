@@ -1,0 +1,123 @@
+{
+  "coffees": [
+    {
+      "id": "1",
+      "name": "Espresso",
+      "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2019%2F09%2FCoffee-National-Coffee-Day-FT-Blog0919.jpg",
+      "price": 4
+    },
+    {
+      "id": "2",
+      "name": "Latte",
+      "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2019%2F09%2FCoffee-National-Coffee-Day-FT-Blog0919.jpg",
+      "price": 5
+    },
+    {
+      "id": "3",
+      "name": "Capuccino",
+      "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2019%2F09%2FCoffee-National-Coffee-Day-FT-Blog0919.jpg",
+      "price": 3
+    },
+    {
+      "id": "4",
+      "name": "Americano",
+      "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2019%2F09%2FCoffee-National-Coffee-Day-FT-Blog0919.jpg",
+      "price": 6
+    },
+    {
+      "id": "5",
+      "name": "Ice Latte",
+      "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2019%2F09%2FCoffee-National-Coffee-Day-FT-Blog0919.jpg",
+      "price": 7
+    }
+  ],
+  "additionals": [
+    {
+      "name": "sugar",
+      "price": 1
+    },
+    {
+      "name": "chocolate syrup",
+      "price": 0.5
+    },
+    {
+      "name": "caramel syrup",
+      "price": 2.5
+    },
+    {
+      "name": "vanilla syrup",
+      "price": 2
+    },
+    {
+      "name": "cinnamon",
+      "price": 3
+    },
+    {
+      "name": "chocolate chips",
+      "price": 1.5
+    }
+  ],
+  "orders": [
+    [
+      {
+        "name": "Espresso",
+        "id": "1",
+        "price": 6,
+        "additional": "vanilla syrup",
+        "img": "Espresso"
+      }
+    ],
+    [
+      {
+        "name": "Espresso",
+        "id": "1",
+        "price": 6,
+        "additional": "vanilla syrup",
+        "img": "Espresso"
+      },
+      {
+        "name": "Ice Latte",
+        "id": "5",
+        "price": 9,
+        "additional": "vanilla syrup",
+        "img": "Ice Latte"
+      }
+    ],
+    [],
+    [],
+    [
+      {
+        "name": "Latte",
+        "id": "2",
+        "price": 5.5,
+        "additional": "chocolate syrup",
+        "img": "Latte"
+      }
+    ],
+    [
+      {
+        "name": "Latte",
+        "id": "2",
+        "price": 5.5,
+        "additional": "chocolate syrup",
+        "img": "Latte"
+      },
+      {
+        "name": "Ice Latte",
+        "id": "5",
+        "price": 9.5,
+        "additional": "caramel syrup",
+        "img": "Ice Latte"
+      }
+    ],
+    [
+      {
+        "name": "Espresso",
+        "id": "1",
+        "price": 6.5,
+        "additional": "caramel syrup",
+        "img": "Espresso"
+      }
+    ]
+  ]
+}

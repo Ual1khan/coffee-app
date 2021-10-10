@@ -12,7 +12,7 @@ interface IAdditional {
     price: number,
 }
 
-interface IOrder {
+export interface IOrder {
     id: string,
     name: string,
     additional: string,
@@ -46,6 +46,10 @@ export const coffeesSlice = createSlice({
         fetchAdditionalsSuccess: (state: CoffeesState, action: PayloadAction<IAdditional[]>) => {
             state.additionals = action.payload;
         },
+        postOrders: (state: CoffeesState) => {},
+        postOrdersSuccess: (state: CoffeesState, action: PayloadAction<IOrder[]>) => {
+            state.orders = [];
+        },
         createOrder: (state: CoffeesState, action: PayloadAction<IOrder>) => {
             const newOrder = action.payload;
             state.orders.some(order => order.id === newOrder.id)
@@ -73,6 +77,8 @@ export const {
     createOrder,
     removeOrder,
     getTotalPrice,
+    postOrders,
+    postOrdersSuccess
 } = coffeesSlice.actions;
 
 export default coffeesSlice.reducer;
