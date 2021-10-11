@@ -23,14 +23,20 @@ export interface IOrder {
 interface CoffeesState {
     coffees: ICoffee[];
     additionals: IAdditional[];
-    orders: IOrder[],
+    orders: {
+        list: IOrder[],
+        serving: string,
+    },
     totalPrice: number,
 }
 
 const initialState: CoffeesState = {
     coffees: [],
     additionals: [],
-    orders: [],
+    orders: {
+        list: [],
+        serving: '',
+    },
     totalPrice : 0,
 };
 
@@ -48,23 +54,27 @@ export const coffeesSlice = createSlice({
         },
         postOrders: (state: CoffeesState) => {},
         postOrdersSuccess: (state: CoffeesState, action: PayloadAction<IOrder[]>) => {
-            state.orders = [];
+            state.orders.list = [];
         },
         createOrder: (state: CoffeesState, action: PayloadAction<IOrder>) => {
             const newOrder = action.payload;
-            state.orders.some(order => order.id === newOrder.id)
+            state.orders.list.some(order => order.id === newOrder.id)
             ? alert("Coffee has already been added to orders")
-            : state.orders = [...state.orders, newOrder];
+            : state.orders.list = [...state.orders.list, newOrder];
         },
         removeOrder: (state: CoffeesState, action: PayloadAction<string>) => {
-            const newOrders = state.orders.filter(item => item.id !== action.payload);
-            state.orders = [...newOrders];
+            const newOrders = state.orders.list.filter(item => item.id !== action.payload);
+            state.orders.list = [...newOrders];
         },
         getTotalPrice: (state: CoffeesState) => {
-            const newTotal = state.orders.reduce((sum, item) => {
+            const newTotal = state.orders.list.reduce((sum, item) => {
                 return sum + item.price;
             }, 0);
             state.totalPrice = newTotal;
+        },
+        changeServing: (state: CoffeesState, action: PayloadAction<string>) => {
+            const newServing = action.payload;
+            state.orders.serving = newServing;
         }
     },
 });
@@ -78,7 +88,8 @@ export const {
     removeOrder,
     getTotalPrice,
     postOrders,
-    postOrdersSuccess
+    postOrdersSuccess,
+    changeServing
 } = coffeesSlice.actions;
 
 export default coffeesSlice.reducer;

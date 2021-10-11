@@ -58,66 +58,6 @@
     }
   ],
   "orders": [
-    [
-      {
-        "name": "Espresso",
-        "id": "1",
-        "price": 6,
-        "additional": "vanilla syrup",
-        "img": "Espresso"
-      }
-    ],
-    [
-      {
-        "name": "Espresso",
-        "id": "1",
-        "price": 6,
-        "additional": "vanilla syrup",
-        "img": "Espresso"
-      },
-      {
-        "name": "Ice Latte",
-        "id": "5",
-        "price": 9,
-        "additional": "vanilla syrup",
-        "img": "Ice Latte"
-      }
-    ],
-    [],
-    [],
-    [
-      {
-        "name": "Latte",
-        "id": "2",
-        "price": 5.5,
-        "additional": "chocolate syrup",
-        "img": "Latte"
-      }
-    ],
-    [
-      {
-        "name": "Latte",
-        "id": "2",
-        "price": 5.5,
-        "additional": "chocolate syrup",
-        "img": "Latte"
-      },
-      {
-        "name": "Ice Latte",
-        "id": "5",
-        "price": 9.5,
-        "additional": "caramel syrup",
-        "img": "Ice Latte"
-      }
-    ],
-    [
-      {
-        "name": "Espresso",
-        "id": "1",
-        "price": 6.5,
-        "additional": "caramel syrup",
-        "img": "Espresso"
-      }
-    ]
+  
   ]
 }

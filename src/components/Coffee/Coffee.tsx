@@ -4,8 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import styles from "./Coffee.module.scss";
-
+import useStyles from "./Coffee.styles";
 
 interface Props {
     img: string,
@@ -14,9 +13,10 @@ interface Props {
 }
 
 const Coffee: FC<Props> = ({img, name, price}: Props) => {
+    const classes = useStyles();
     return (
-        <Card className={styles.card} sx={{ maxWidth: 220}}>
-            <CardActionArea className={styles.area}>
+        <Card className={classes.card} sx={{ maxWidth: 220}}>
+            <CardActionArea className={classes.area}>
                 <CardMedia
                     component="img"
                     height="160"

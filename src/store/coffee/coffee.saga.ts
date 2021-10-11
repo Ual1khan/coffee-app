@@ -14,11 +14,9 @@ import {
 
 export function* onFetchCoffees() {
     yield put(startFetching(fetchCoffees.type));
-
     try {
         const res: SagaReturnType<typeof getAllCoffees> = yield getAllCoffees();
         const coffees = res.data;
-
         yield put(fetchCoffeesSuccess(coffees));
         yield put(successFetching(fetchCoffees.type));
     } catch (error: any) {
@@ -33,7 +31,6 @@ export function* onFetchAdditionals() {
     try {
         const res: SagaReturnType<typeof getAllAdditionals> = yield getAllAdditionals();
         const additionals = res.data;
-
         yield put(fetchAdditionalsSuccess(additionals));
         yield put(successFetching(fetchAdditionals.type));
     } catch (error: any) {
@@ -48,7 +45,6 @@ export function* onPostOrders() {
     const state: IOrder[] = yield select(selectOrders);
     try {
         const res: SagaReturnType<typeof postAllOrders> = yield postAllOrders(state);
-        console.log(res);
         yield put(postOrdersSuccess(res.data));
         yield put(successFetching(postOrders.type));
     } catch (error: any) {

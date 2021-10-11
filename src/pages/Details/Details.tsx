@@ -1,11 +1,12 @@
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import Additional from '../../components/Additional/Additional';
 import { selectAdditionals, selectCoffees } from '../../store/coffee/coffee.selector';
 import { createOrder, fetchAdditionals } from '../../store/coffee/coffee.slice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectLoading } from '../../store/loading/loading.selector';
-
+import useStyles from "./Details.styles";
 
 interface Params {
     id: string;
@@ -13,18 +14,20 @@ interface Params {
 
 const Details = () => {
     const { id } = useParams<Params>();
-    const [radio, setRadio] = useState("");
+    const [disable, setDisable] = useState(true);
+    const [addtn, setAddtn] = useState<String>();
     const additionals = useAppSelector(selectAdditionals);
     const loading = useAppSelector(selectLoading);
     const coffees = useAppSelector(selectCoffees);
     const dispatch = useAppDispatch();
 
     const getAdditional = (item: React.ChangeEvent<HTMLInputElement>): void => {
-        setRadio(item.target.value);
+        setAddtn(item.target.value);
+        setDisable(false);
     }
 
     const coffee = coffees.filter(item => item.id === id);
-    const additional = additionals.filter(item => item.name === radio && radio);
+    const additional = additionals.filter(item => item.name === addtn && addtn);
     const totalPrice = additional.length ? (coffee[0].price + additional[0].price) : coffee[0].price;
 
     useEffect(() => {
@@ -38,34 +41,41 @@ const Details = () => {
             id: coffee[0].id,
             price: totalPrice,
             additional: additional[0].name,
-            img: coffee[0].name,
+            img: coffee[0].img,
         }));
     }
+
+    const classes = useStyles();
+
     return (
-        <div>
-            <h2>Coffee name: {coffee[0].name}</h2>
-            <h3>{coffee[0].price}$</h3>
-            <h3>Дополнение: {radio}</h3>
-            {loading[fetchAdditionals.type] === "PROGRESS" && <CircularProgress />}
-            {loading[fetchAdditionals.type] === "SUCCESS" && 
-                additionals.map((item, index) => (
-                    <div key={index}>
-                        <label>{item.name} {item.price}$</label>
-                        <input 
-                            type="radio" 
-                            value={item.name}
-                            name="add"
-                            onChange={getAdditional}
-                        />
-                        <br />
-                    </div>
-            ))}
+        <div className={classes.details}>
             <div>
-                Total pice: {totalPrice} $
+                <div className={classes.heading}>Coffee: {coffee[0].name} {coffee[0].price} $</div>
+                <div className={classes.image}>
+                    <img src={coffee[0].img} alt="coffee" />
+                </div>
             </div>
-            <button onClick={handleOrder}>
-                Add to order
-            </button>
+            <div>
+                {loading[fetchAdditionals.type] === "PROGRESS" && <CircularProgress />}
+                <div className={classes.subheading}>Additional: {addtn}</div>
+                <div className={classes.additionals}>
+                    {loading[fetchAdditionals.type] === "SUCCESS" && 
+                        additionals.map((item, index) => (
+                            <div key={index}>
+                                <Additional 
+                                    name={item.name} 
+                                    price={item.price}
+                                    getAdditional={getAdditional}
+                                />
+                                <br />
+                            </div>
+                    ))}
+                </div>
+                <div className={classes.heading}>Total pice: {totalPrice} $</div>
+                <Button sx={{ mt: 2 }} variant="contained" disabled={disable} onClick={handleOrder}>
+                    Add to order
+                </Button>
+            </div>
         </div>
     )
 }
